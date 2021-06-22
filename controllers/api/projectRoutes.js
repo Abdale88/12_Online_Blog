@@ -46,8 +46,8 @@ router.put('/:id', async (req, res) => {
   try {
     const projectData = await Project.update(
       {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        name: req.body.name,
+        description: req.body.description,
       },
       {
         where:{ 

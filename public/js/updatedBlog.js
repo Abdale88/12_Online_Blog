@@ -8,7 +8,7 @@ const updateFormHandler = async (event) => {
       window.location.toString().split('/').length - 1
     ];
   
-      const response = await fetch(`/api/projects${id}`, {
+      const response = await fetch(`/api/projects/${id}`, {
         method: 'PUT',
         body: JSON.stringify({ name, description }),
         headers: {
