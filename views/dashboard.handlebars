@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
+  </div>
+   <div class='col-md-6 project-list'>
+    <div class='row mb-2'>
+      <div class='col-md-10'>
+        <button class='btn btn-lg btn-primary'><a href="/new">New Post</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+
+  {{#if blogs.length}}
+  <div class="col-md-6 blog-list">
+    <h3>Your Current Blogs:</h3>
+
+    {{#each blogs as |blog|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/blog/{{blog.id}}">{{blog.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class='btn btn-sm btn-primary'><a href="/blog/{{blog.id}}">Update</a></button>
+        <button class="btn btn-sm btn-danger delete-blog" data-id="{{blog.id}}">DELETE</button>
+      </div>
+    </div> 
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="/js/delete.js"></script>
