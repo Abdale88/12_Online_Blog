@@ -1,0 +1,18 @@
+<!-- Loop over each object in the projects array -->
+{{#each blogs as |blog| }}
+<div class="row mb-4 blog">
+  <div class="col-md-5">
+    <h2>
+      <a href="/blog/{{blog.id}}">{{blog.name}}</a>
+    </h2>
+    <p>
+      {{blog.description}}
+    </p>
+    {{!-- <i class="fas fa-plus-square"></i> --}}
+    <button class="btn btn-sm btn-danger"><a href="/comments/{{blog.id}}">Add Comments</a></button>
+  </div>
+  <div class="col-md-2">
+    <p>Written by {{blog.user.name}} On {{format_date blog.date_created}}</p>
+  </div>
+</div>
+{{/each}}
