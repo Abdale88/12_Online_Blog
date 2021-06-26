@@ -41,7 +41,6 @@ router.get('/blog/:id', withAuth, async (req, res) => {
     const blog = blogData.get({ plain: true });
 
     res.render('blog', {...blog, logged_in: req.session.logged_in});
-    console.log('...project here >> ', blog);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -75,24 +74,24 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-router.get('/comments/:id', withAuth, async (req, res) =>{
+router.get('/comments/:id', withAuth, async (req, res) => {
   try {
-    const commentData = await Comments.findByPk({
-      where:{
-        id: req.params.id,
-      },
-      attributes:['id', 'user_id', 'blog_id', 'comment'],
-      include: [{model: Blog },{model: User }],
+    const commentData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
     });
 
-    const newComment = commentData.get({ plain: true});
+    const comment = commentData.get({ plain: true });
 
-    res.render(comment, {...newComment, logged_in: true});
-    console.log('these are the comments >>> ', newComment)
-  } catch (error) {
-    res.status(500).json(error)
+    res.render('addComments', {...comment, logged_in: req.session.logged_in});
+  } catch (err) {
+    res.status(500).json(err);
   }
-})
+});
 
 router.get('/new', withAuth, async (req, res) => {
   try {
